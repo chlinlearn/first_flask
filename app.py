@@ -13,28 +13,60 @@ from flask import Flask,render_template,redirect,url_for
 
 app = Flask(__name__)
 
+
+
 #app.route是一个装饰器，@开头，并且在函数的上面，说明是装饰器
 #装饰器的作用是做一个URL与视图函数的映射
 @app.route('/')
 def index():
-    #重定向
-    login_url=url_for('login')
-    return redirect(login_url)
-    return '这是首页'
+    return render_template('index.html')
 
 @app.route('/login/')
 def login():
-    return '这是登录页面'
+    return render_template('login.html')
+    # books=[
+    #     {
+    #         'name':'西游记',
+    #         'author':'吴承恩',
+    #         'price':209
+    #     },
+    #     {
+    #         'name': '红楼梦',
+    #         'author': '曹雪芹',
+    #         'price': 212
+    #     },
+    #     {
+    #         'name': '三国演义',
+    #         'author': '罗贯中',
+    #         'price': 300
+    #     },
+    #     {
+    #         'name': '水浒传',
+    #         'author': '施耐庵',
+    #         'price': 189
+    #     }
+    # ]
+    # return render_template('index.html',books=books)
+    # user={
+    #     'username':'xcl',
+    #     'age':20
+    # }
+    # return   render_template('index.html',user=user)
+#     #重定向
+#     login_url=url_for('login')
+#     return redirect(login_url)
+#     return '这是首页'
+#
+# @app.route('/login/')
+# def login():
+#     return '这是登录页面'
 
-@app.route('/question/<is_login>')
-def question(is_login):
-    if is_login=='1':
-        return '这是发布问答页面'
-    else:
-        return redirect(url_for('login'))
-
-
-
+# @app.route('/question/<is_login>')
+# def question(is_login):
+#     if is_login=='1':
+#         return '这是发布问答页面'
+#     else:
+#         return redirect(url_for('login'))
 
     # class Person(object):
     #     name='abc'
