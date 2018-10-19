@@ -1,6 +1,6 @@
 #encoding:utf-8
 #从flask框架导入flask这个类
-from flask import Flask,render_template
+from flask import Flask,render_template,redirect,url_for
 
 #初始化一个flask对象
 #flask()
@@ -17,24 +17,44 @@ app = Flask(__name__)
 #装饰器的作用是做一个URL与视图函数的映射
 @app.route('/')
 def index():
-    class Person(object):
-        name='abc'
-        age=18
-    p=Person()
+    #重定向
+    login_url=url_for('login')
+    return redirect(login_url)
+    return '这是首页'
 
-    #使用字典定义
-    context_dict={
-        'username':'xcl',
-        'gender':'男',
-        'age':20,
-        #访问模型中的属性
-        'person':p,
-        'website':{
-            'baidu':'www.baidu.com',
-            'google':'www.google.com'
-        }
-    }
-    return render_template('index.html',**context_dict)
+@app.route('/login/')
+def login():
+    return '这是登录页面'
+
+@app.route('/question/<is_login>')
+def question(is_login):
+    if is_login=='1':
+        return '这是发布问答页面'
+    else:
+        return redirect(url_for('login'))
+
+
+
+
+    # class Person(object):
+    #     name='abc'
+    #     age=18
+    # p=Person()
+    #
+    # #使用字典定义
+    # context_dict={
+    #     'username':'xcl',
+    #     'gender':'男',
+    #     'age':20,
+    #     #访问模型中的属性
+    #     'person':p,
+    #     'website':{
+    #         'baidu':'www.baidu.com',
+    #         'google':'www.google.com'
+    #     }
+    # }
+    # return render_template('index.html',**context_dict)
+
 
 #如果当前这个文件是作为入口程序运行，那么就执行app.run()
 if __name__ == '__main__':
