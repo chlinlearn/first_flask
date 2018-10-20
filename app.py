@@ -17,6 +17,7 @@ app = Flask(__name__)
 
 #app.route是一个装饰器，@开头，并且在函数的上面，说明是装饰器
 #装饰器的作用是做一个URL与视图函数的映射
+#视图函数
 @app.route('/')
 def index():
     return render_template('index.html')
